@@ -20,7 +20,7 @@ jobs:
     - name: Lint with ESLint
       continue-on-error: true
       run: |
-        npx eslint public/src/components tests --output-file eslint-report.txt -f stylish
+        npx eslint public/src/components --output-file eslint-report.txt -f stylish
 
     - name: Check format with Prettier
       continue-on-error: true
@@ -42,21 +42,13 @@ jobs:
           prettier-report.txt
           coverage/lcov-report/index.html
 
-    - name: SonarQube Scan
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@v2
+      with:
+        projectKey: mahek320_ui-ci-code-quality
+        organization: mahek320
       env:
-        SONAR_URL: https://sonarcloud.io/
-        SONAR_PROJECT_KEY: mahek320_ui-ci-code-quality
-        SONAR_SOURCES: public/src/components
-      run: |
-        ./sonar-scanner/bin/sonar-scanner -X \
-        -Dsonar.issuesReport.console.enable=true \
-        -Dsonar.host.url=${{ env.SONAR_URL }} \
-        -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} \
-        -Dsonar.sources=${{ env.SONAR_SOURCES }} \
-        -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
-        -Dsonar.sourceEncoding=UTF-8 \
-        -Dsonar.verbose=true \
-        -Dsonar.organization=mahek320
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     - name: Send Email Notification
       if: always()
@@ -72,10 +64,9 @@ jobs:
         body: |
           Hello,
           The UI CI pipeline has completed. Please find the reports and SonarQube dashboard below:
-          - SonarQube Dashboard: https://sonarcloud.io/project/overview?id=your_project_key
+          - SonarQube Dashboard: https://sonarcloud.io/project/overview?id=mahek320_ui-ci-code-quality
           - ESLint, Prettier, and Coverage Reports are attached.
         attachments: |
           eslint-report.txt
           prettier-report.txt
           coverage/lcov-report/index.html
-
