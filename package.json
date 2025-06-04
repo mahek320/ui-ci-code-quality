@@ -6,8 +6,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "format": "prettier --write 'src/**/*.{ts,tsx}'"
+    "lint": "eslint 'public/src/components/**/*.{ts,tsx}'",
+    "format": "prettier --write 'public/src/components/**/*.{ts,tsx}'"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -23,6 +23,16 @@
     "prettier": "^3.2.5",
     "react-scripts": "5.0.1",
     "typescript": "^5.3.3"
+  },
+  "jest": {
+    "roots": ["<rootDir>/public/src/components"],
+    "testMatch": ["**/__tests__/**/*.+(ts|tsx|js)", "**/?(*.)+(spec|test).+(ts|tsx|js)"],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "setupFilesAfterEnv": ["@testing-library/jest-dom/extend-expect"],
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": ["text", "lcov"]
   }
 }
-
