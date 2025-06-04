@@ -1,1 +1,82 @@
+name: UI Code Quality Check
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Lint with ESLint
+      continue-on-error: true
+      run: |
+        npx eslint src tests --output-file eslint-report.txt -f stylish
+
+    - name: Check format with Prettier
+      continue-on-error: true
+      run: |
+        npx prettier --check "src/**/*.{js,jsx,ts,tsx}" > prettier-report.txt || true
+
+    - name: Run Jest tests with coverage
+      continue-on-error: true
+      run: |
+        npm test -- --coverage --coverageReporters="text" --coverageReporters="lcov"
+
+    - name: Upload CI reports
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: UI reports
+        path: |
+          eslint-report.txt
+          prettier-report.txt
+          coverage/lcov-report/index.html
+
+    - name: SonarQube Scan
+      env:
+        SONAR_URL: https://sonarcloud.io/
+        SONAR_PROJECT_KEY: mahek320_ui-ci-code-quality
+        SONAR_SOURCES: src
+      run: |
+        ./sonar-scanner/bin/sonar-scanner -X \
+        -Dsonar.issuesReport.console.enable=true \
+        -Dsonar.host.url=${{ env.SONAR_URL }} \
+        -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} \
+        -Dsonar.sources=${{ env.SONAR_SOURCES }} \
+        -Dsonar.python.coverage.reportPaths=coverage.xml \
+        -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
+        -Dsonar.sourceEncoding=UTF-8 \
+        -Dsonar.verbose=true \
+        -Dsonar.organization=mahek320
+
+    - name: Send Email Notification
+      if: always()
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.SENDER_MAIL }}
+        password: ${{ secrets.SENDER_PASSWORD }}
+        subject: "CI Report and SonarQube Dashboard - UI"
+        to: ${{ secrets.RECEIVER_MAIL }}
+        from: GitHub Actions ${{ secrets.SENDER_MAIL }}
+        body: |
+          Hello,
+          The UI CI pipeline has completed. Please find the reports and SonarQube dashboard below:
+          - SonarQube Dashboard: https://sonarcloud.io/project/overview?id=your_project_key
+          - ESLint, Prettier, and Coverage Reports are attached.
+        attachments: |
+          eslint-report.txt
+          prettier-report.txt
+          coverage/lcov-report/index.html
 
