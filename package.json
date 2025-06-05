@@ -1,52 +1,21 @@
-{
-  "name": "ui-project",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "lint": "eslint 'public/src/components/**/*.{ts,tsx}'",
-    "format": "prettier --write 'public/src/components/**/*.{ts,tsx}'"
+"jest": {
+  "roots": [
+    "<rootDir>/public/src/components"
+  ],
+  "testMatch": [
+    "**/__tests__/**/*.+(ts|tsx|js)",
+    "**/?(*.)+(spec|test).+(ts|tsx|js)"
+  ],
+  "transform": {
+    "^.+\\.(ts|tsx)$": "ts-jest"
   },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^6.1.5",
-    "@testing-library/react": "^14.1.2",
-    "@types/jest": "^29.5.11",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-react": "^7.33.2",
-    "jest": "^28.1.3",
-    "prettier": "^3.2.5",
-    "react-scripts": "5.0.1",
-    "ts-jest": "^28.0.8",
-    "typescript": "^4.9.5"
-  },
-  "jest": {
-    "roots": [
-      "<rootDir>/public/src/components"
-    ],
-    "testMatch": [
-      "**/__tests__/**/*.+(ts|tsx|js)",
-      "**/?(*.)+(spec|test).+(ts|tsx|js)"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "ts-jest"
-    },
-    "setupFilesAfterEnv": [
-      "@testing-library/jest-dom/extend-expect"
-    ],
-    "collectCoverage": true,
-    "coverageDirectory": "coverage",
-    "coverageReporters": [
-      "text",
-      "lcov"
-    ]
-  }
+  "setupFilesAfterEnv": [
+    "@testing-library/jest-dom/extend-expect"
+  ],
+  "collectCoverage": true,
+  "coverageDirectory": "coverage",
+  "coverageReporters": [
+    "text",
+    "lcov"
+  ]
 }
