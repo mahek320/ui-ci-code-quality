@@ -2,11 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
-console.log('Rendering App')  // Prettier: double space, ESLint: console.log warning
-
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+)
 root.render(
   <React.StrictMode>
-    <App/>
-  </React.StrictMode> // Prettier: spacing issue
+    <App />
+  </React.StrictMode>
 )
