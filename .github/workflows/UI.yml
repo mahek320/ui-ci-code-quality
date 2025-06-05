@@ -20,7 +20,7 @@ jobs:
         wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610.zip -O sonar-scanner-cli.zip
         unzip sonar-scanner-cli.zip
         sudo mv  sonar-scanner-6.2.1.4610 sonar-scanner
-        sudo chmod -R 777 sonar-scanne
+        sudo chmod -R 777 sonar-scanner
     
 
     - name: Lint with ESLint
