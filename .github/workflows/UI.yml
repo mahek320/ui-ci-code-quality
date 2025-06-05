@@ -37,6 +37,12 @@ jobs:
       run: |
         npm test -- --coverage --coverageReporters="text" --coverageReporters="lcov"
 
+    - name: List generated reports
+      run: |
+        echo "Listing reports..."
+        ls -l eslint-report.txt prettier-report.txt coverage/lcov-report/index.html || true
+
+
     - name: Upload CI reports
       if: always()
       uses: actions/upload-artifact@v4
