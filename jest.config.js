@@ -7,7 +7,7 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest'
   },
-  setupFilesAfterEnv: ['<rootDir>/public/src/components/node_modules/@testing-library/jest-dom/extend-expect'],
+  setupFilesAfterEnv: ['<rootDir>/node_modules/@testing-library/jest-dom/extend-expect'],
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov'],
