@@ -17,6 +17,7 @@ jobs:
     - name: Install dependencies
       run: | 
         npm install --legacy-peer-deps
+        npm install --save-dev @testing-library/react @testing-library/jest-dom
         wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610.zip -O sonar-scanner-cli.zip
         unzip sonar-scanner-cli.zip
         sudo mv sonar-scanner-6.2.1.4610 sonar-scanner
@@ -30,12 +31,17 @@ jobs:
     - name: Check format with Prettier
       continue-on-error: true
       run: |
-        npx prettier --check "public/src/components/**/*.{js,jsx,ts,tsx}" > prettier-report.txt || true
+        npx prettier --list-different "public/src/components/**/*.{js,jsx,ts,tsx}" > prettier-report.txt || true
 
     - name: Run Jest tests with coverage
       continue-on-error: true
       run: |
         npm test -- --coverage --coverageReporters="text" --coverageReporters="lcov"
+
+    - name: List coverage files
+      run: |
+        echo "Checking coverage directory..."
+        ls -R coverage || echo "Coverage directory not found"
 
     - name: List generated reports
       run: |
