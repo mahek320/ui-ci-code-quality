@@ -15,7 +15,13 @@ jobs:
         node-version: '18'
 
     - name: Install dependencies
-      run: npm install --legacy-peer-deps
+      run: | 
+        npm install --legacy-peer-deps
+        wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610.zip -O sonar-scanner-cli.zip
+        unzip sonar-scanner-cli.zip
+        sudo mv  sonar-scanner-6.2.1.4610 sonar-scanner
+        sudo chmod -R 777 sonar-scanne
+    
 
     - name: Lint with ESLint
       continue-on-error: true
