@@ -3,10 +3,17 @@ module.exports = {
   testMatch: [
     '**/__tests__/**/*.+(ts|tsx|js)',
     '**/?(*.)+(spec|test).+(ts|tsx|js)'
-  '^.+\\.(ts|tsx)$': 'ts-jest'
+  ],
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest'
   },
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   collectCoverage: true,
   coverageDirectory: 'coverage',
-  coverageReporters: ['text', 'lcov']
+  coverageReporters: ['text', 'lcov'],
+  collectCoverageFrom: [
+    'public/src/components/**/*.{ts,tsx,js,jsx}'
+  ]
 };
+
+
