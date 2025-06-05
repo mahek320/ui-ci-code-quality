@@ -99,3 +99,4 @@ jobs:
           eslint-report.txt
           prettier-report.txt
           coverage/lcov-report/index.html
+          npm-audit-report.html
