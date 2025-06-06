@@ -1,6 +1,6 @@
 name: UI Code Quality Check
 
-on: push
+on: push 
  
 jobs:
   build: 
