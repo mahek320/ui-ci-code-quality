@@ -23,8 +23,7 @@ jobs:
         sudo mv sonar-scanner-6.2.1.4610 sonar-scanner
         sudo chmod -R 777 sonar-scanner
 
-    - name: Install audit-html
-      run: npm install -g audit-html
+   
 
     - name: Lint with ESLint
       continue-on-error: true
@@ -41,15 +40,7 @@ jobs:
       run: |
         npm test -- --coverage 
 
-    - name: Scan for Vulnerabilities (npm audit)
-      continue-on-error: true
-      run: |
-        npm audit --json > npm-audit-report.json || true
 
-    - name: Generate HTML Vulnerability Report
-      run: |
-        npm audit --json > npm-audit-report.json || true
-        audit-html -i npm-audit-report.json -o npm-audit-report.html
 
     - name: Upload CI reports
       if: always()
@@ -60,7 +51,7 @@ jobs:
           eslint-report.txt
           prettier-report.txt
           coverage/lcov-report/index.html
-          npm-audit-report.html
+         
 
     - name: SonarQube Scan
       env:
