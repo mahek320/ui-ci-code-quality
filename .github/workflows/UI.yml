@@ -24,13 +24,10 @@ jobs:
         sudo mv sonar-scanner-6.2.1.4610 sonar-scanner
         sudo chmod -R 777 sonar-scanner
 
-   
-
     - name: Lint with ESLint
       continue-on-error: true
       run: |
         npx eslint public/src/components -f json -o eslint-report.txt
-
 
     - name: Check format with Prettier
       continue-on-error: true
@@ -43,15 +40,11 @@ jobs:
         npx jest --clearCache
         npm test -- --coverage 
         
-
-
     - name: Run Retire.js for vulnerability scan
       run: |
         npm install -g retire
         bash run_retirejs.sh
-   
-    
-
+        chmod +x run_retirejs.sh
 
     - name: Upload CI reports
       if: always()
