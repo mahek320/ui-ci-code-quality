@@ -12,5 +12,7 @@ describe('App Component', () => {
     expect(screen.getByText('Mahek')).toBeInTheDocument()
     expect(screen.getByText('Status: Active')).toBeInTheDocument()
     expect(screen.getByText('Age: 25')).toBeInTheDocument()
+    expect(screen.getByTestId('user-card')).toBeInTheDocument()
+
   })
 })
