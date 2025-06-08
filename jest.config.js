@@ -1,18 +1,17 @@
 module.exports = {
-  roots: ['<rootDir>/src/public'], // ✅ correct root
+  roots: ['<rootDir>/public/src/components'],
   testMatch: [
-    '**/__tests__/**/*.+(ts|tsx|js)',
-    '**/?(*.)+(spec|test).+(ts|tsx|js)'
+    '**/?(*.)+(spec|test).[tj]s?(x)'
   ],
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest'
   },
-  setupFilesAfterEnv: ['<rootDir>/src/public/setupTests.ts'], // ✅ fix path
+  setupFilesAfterEnv: ['<rootDir>/public/src/components/setupTests.ts'],
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov'],
   collectCoverageFrom: [
-    'src/public/**/*.{ts,tsx,js,jsx}',     // ✅ include everything under public
-    '!src/public/index.tsx'                // optional: exclude entry file
+    'public/src/components/**/*.{ts,tsx,js,jsx}',
+    '!public/src/components/index.tsx'  // optional: skip index
   ]
-};
+}
