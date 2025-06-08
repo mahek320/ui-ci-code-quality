@@ -12,6 +12,6 @@ module.exports = {
   coverageReporters: ['text', 'lcov'],
   collectCoverageFrom: [
     'public/src/components/**/*.{ts,tsx,js,jsx}',
-    '!public/src/components/index.tsx'  // optional: skip index
+    
   ]
 }
