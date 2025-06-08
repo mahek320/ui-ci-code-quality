@@ -47,8 +47,6 @@
 
 ### Required Secrets
 
-### Required Secrets
-
 | Secret Name        | Description                       |
 |--------------------|-----------------------------------|
 | `SONAR_TOKEN`      | Token for SonarCloud authentication (Go to SonarCloud > My Account > Security, generate a token, and add it to GitHub secrets as SONAR_TOKEN) |
