@@ -62,21 +62,19 @@ jobs:
 
     - name: SonarQube Scan
       env:
-        SONAR_URL: https://sonarcloud.io/
-        SONAR_PROJECT_KEY: mahek320_ui-ci-code-quality
-        SONAR_SOURCES: public/src/components
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        ./sonar-scanner/bin/sonar-scanner -X \
-        -Dsonar.issuesReport.console.enable=true \
-        -Dsonar.host.url=${{ env.SONAR_URL }} \
-        -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} \
-        -Dsonar.sources=${{ env.SONAR_SOURCES }} \
-        -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
-        -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
-        -Dsonar.sourceEncoding=UTF-8 \
-        -Dsonar.verbose=true \
-        -Dsonar.inclusions=**/*.ts,**/*.tsx \
-        -Dsonar.organization=mahek320
+            sed -i 's|SF:.*/public/src|SF:public/src|g' coverage/lcov.info
+            ./sonar-scanner/bin/sonar-scanner \
+              -Dsonar.projectKey=mahek320_ui-ci-code-quality \
+              -Dsonar.organization=mahek320 \
+              -Dsonar.sources=public/src \
+              -Dsonar.tests=public/src \
+              -Dsonar.inclusions=**/*.ts,**/*.tsx \
+              -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
+              -Dsonar.host.url=https://sonarcloud.io \
+              -Dsonar.login=${SONAR_TOKEN} \
+              -Dsonar.sourceEncoding=UTF-8
 
     - name: Send Email Notification
       if: always()
