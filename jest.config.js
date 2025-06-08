@@ -1,5 +1,5 @@
 module.exports = {
-  roots: ['<rootDir>/public/src/components'],
+  
   testMatch: [
     '**/?(*.)+(spec|test).[tj]s?(x)'
   ],
@@ -12,6 +12,7 @@ module.exports = {
   coverageReporters: ['text', 'lcov'],
   collectCoverageFrom: [
     'public/src/components/**/*.{ts,tsx,js,jsx}',
+    '!**/*.d.ts'
     
   ]
 }
