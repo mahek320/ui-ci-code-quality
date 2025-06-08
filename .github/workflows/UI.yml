@@ -43,8 +43,11 @@ jobs:
     - name: Run Retire.js for vulnerability scan
       run: |
         npm install -g retire
-        retire --path public/src/components --outputformat json --outputpath retire-report.txt        
+        retire --path public/src/components --outputformat json --outputpath retire-report.txt   
+        
+        ls -l coverage/lcov.info
 
+        
     - name: Upload CI reports
       if: always()
       uses: actions/upload-artifact@v4
