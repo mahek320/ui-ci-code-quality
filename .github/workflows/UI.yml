@@ -41,6 +41,12 @@ jobs:
         npm test -- --coverage 
 
 
+    - name: Run Retire.js for vulnerability scan
+      run: |
+        npm install -g retire
+        retire --outputformat json --outputpath retire-report.txt || true
+
+
 
     - name: Upload CI reports
       if: always()
@@ -51,6 +57,7 @@ jobs:
           eslint-report.txt
           prettier-report.txt
           coverage/lcov-report/index.html
+          retire-report.txt
          
 
     - name: SonarQube Scan
@@ -89,5 +96,6 @@ jobs:
         attachments: |
           eslint-report.txt
           prettier-report.txt
+          retire-report.txt
           coverage/lcov-report/index.html
-          npm-audit-report.html
+          
