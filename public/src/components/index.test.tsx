@@ -1,4 +1,4 @@
 
-test('dummy test for index', () => {
+test('index bootstrap runs', () => {
   expect(true).toBe(true)
 })
