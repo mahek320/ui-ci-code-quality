@@ -38,7 +38,7 @@ jobs:
       continue-on-error: true
       run: |
         npx jest --clearCache
-        npm test -- --coverage 
+        npm test -- --coverage --collectCoverageFrom="public/src/**/*.{ts,tsx}" --coverageReporters=lcov
         
     - name: Run Retire.js for vulnerability scan
       run: |
