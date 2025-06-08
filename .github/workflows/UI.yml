@@ -43,8 +43,7 @@ jobs:
     - name: Run Retire.js for vulnerability scan
       run: |
         npm install -g retire
-        bash run_retirejs.sh
-        chmod +x run_retirejs.sh
+        retire --path public/src/components --outputformat json --outputpath retire-report.txt        
 
     - name: Upload CI reports
       if: always()
