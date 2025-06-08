@@ -10,7 +10,7 @@ const UserCard: React.FC<UserCardProps> = ({ name, age, isActive }) => {
   return (
     <div data-testid="user-card" style={{ border: '1px solid gray', padding: '1rem' }}>
       <h2>{name}</h2>
-      {age && <p>Age: {age}</p>}
+      {typeof age !== 'undefined' && <p>Age: {age}</p>}
       <p>Status: {isActive ? 'Active' : 'Inactive'}</p>
     </div>
   )
