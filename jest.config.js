@@ -1,4 +1,5 @@
 module.exports = {
+  roots: ['<rootDir>/public/src'],
   
   testMatch: [
     '**/?(*.)+(spec|test).[tj]s?(x)'
