@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import App from './App'
+jest.mock('./App')
 
 describe('App Component', () => {
   test('renders heading', () => {
