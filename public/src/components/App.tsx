@@ -1,22 +1,13 @@
-import { render, screen } from '@testing-library/react'
-import App from './App'
+import React from 'react'
+import UserCard from './UserCard'
 
-describe('App Component', () => {
-  test('renders the dashboard heading', () => {
-    render(<App />)
-    expect(screen.getByText(/Welcome to the User Dashboard/i)).toBeInTheDocument()
-  })
+const App: React.FC = () => {
+  return (
+    <div>
+      <h1>Welcome to the User Dashboard</h1>
+      <UserCard name="Mahek" age={25} isActive={true} />
+    </div>
+  )
+}
 
-  test('renders UserCard with correct props', () => {
-    render(<App />)
-    
-    // Check for name
-    expect(screen.getByText('Mahek')).toBeInTheDocument()
-
-    // Check for status
-    expect(screen.getByText('Status: Active')).toBeInTheDocument()
-
-    // Check for age
-    expect(screen.getByText('Age: 25')).toBeInTheDocument()
-  })
-})
+export default App
