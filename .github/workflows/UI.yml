@@ -48,9 +48,7 @@ jobs:
     - name: Run Retire.js for vulnerability scan
       run: |
         npm install -g retire
-        retire --version
-        retire --path public/src/components --outputformat txt > retire-report.txt || true
-        ls -la
+        bash run_retirejs.sh
    
     
 
