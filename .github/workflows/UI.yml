@@ -38,7 +38,9 @@ jobs:
     - name: Run Jest tests with coverage
       continue-on-error: true
       run: |
+        npx jest --clearCache
         npm test -- --coverage 
+        
 
 
     - name: Run Retire.js for vulnerability scan
