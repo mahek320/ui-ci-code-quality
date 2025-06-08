@@ -22,4 +22,9 @@ describe('UserCard Component', () => {
     render(<UserCard name="Sam" isActive={true} />)
     expect(screen.queryByText(/Age:/)).toBeNull()
   })
+
+  test('renders with all props', () => {
+    const { container } = render(<UserCard name="Test" age={40} isActive={false} />)
+    expect(container).toBeTruthy()
+  })
 })
