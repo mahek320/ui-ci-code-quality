@@ -12,7 +12,7 @@ module.exports = {
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov'],
   collectCoverageFrom: [
-    'public/src/components/App.tsx',
+    
     'public/src/components/**/*.{ts,tsx,js,jsx}',
     '!**/*.d.ts'
     
