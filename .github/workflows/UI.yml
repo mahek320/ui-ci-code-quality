@@ -29,7 +29,8 @@ jobs:
     - name: Lint with ESLint
       continue-on-error: true
       run: |
-        npx eslint public/src/components --output-file eslint-report.txt -f stylish
+        npx eslint public/src/components -f json -o eslint-report.txt
+
 
     - name: Check format with Prettier
       continue-on-error: true
@@ -78,6 +79,7 @@ jobs:
         -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
         -Dsonar.sourceEncoding=UTF-8 \
         -Dsonar.verbose=true \
+        -Dsonar.inclusions=**/*.ts,**/*.tsx \
         -Dsonar.organization=mahek320
 
     - name: Send Email Notification
