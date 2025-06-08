@@ -45,7 +45,7 @@ jobs:
         npm install -g retire
         retire --path public/src/components --outputformat json --outputpath retire-report.txt   
         
-        ls -l coverage/lcov.info
+        cat coverage/lcov.info
 
         
     - name: Upload CI reports
